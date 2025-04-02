@@ -1,5 +1,5 @@
 (define (problem sorting-simple)
-  (:domain sorting)
+  (:domain block-sorting)
   
   (:objects
     block1 - block

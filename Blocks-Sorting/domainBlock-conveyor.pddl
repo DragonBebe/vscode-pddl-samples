@@ -2,17 +2,44 @@
   (:requirements :strips :typing :negative-preconditions)
   
   (:types 
-    block box color position - object
+    block box color
   )
   
   (:predicates
-    (on-conveyor ?b - block)                    ; 方块在传送带上
-    (in-box ?b - block ?box - box)              ; 方块在盒子里
-    (holding ?b - block)                        ; 机械臂抓住方块
-    (handempty)                                 ; 机械臂空闲
-    (block-color ?b - block ?c - color)         ; 方块颜色
-    (box-color ?box - box ?c - color)           ; 盒子颜色
-    (robot-position ?p - position)              ; 机械臂所在位置
+    (on-conveyor ?b - block)
+    (in-box ?b - block ?box - box)
+    (holding ?b - block)
+    (handempty)
+    (block-color ?b - block ?c - color)
+    (box-color ?box - box ?c - color)
+    (color-identified ?b - block)
+    (color-matched ?b - block ?box - box)
+  )
+  
+  (:action scan-color
+    :parameters (?b - block)
+    :precondition (and 
+                    (on-conveyor ?b)
+                    (not (color-identified ?b))
+                    (handempty)
+                  )
+    :effect (and 
+              (color-identified ?b)
+            )
+  )
+  
+  (:action match-color
+    :parameters (?b - block ?box - box ?c - color)
+    :precondition (and 
+                    (color-identified ?b)
+                    (block-color ?b ?c)
+                    (box-color ?box ?c)
+                    (not (color-matched ?b ?box))
+                    (handempty)
+                  )
+    :effect (and 
+              (color-matched ?b ?box)
+            )
   )
   
   (:action pickup
@@ -20,6 +47,7 @@
     :precondition (and 
                     (on-conveyor ?b)
                     (handempty)
+                    (color-identified ?b)
                   )
     :effect (and 
               (holding ?b)
@@ -29,11 +57,10 @@
   )
   
   (:action put-in-box
-    :parameters (?b - block ?box - box ?c - color)
+    :parameters (?b - block ?box - box)
     :precondition (and 
                     (holding ?b)
-                    (block-color ?b ?c)
-                    (box-color ?box ?c)
+                    (color-matched ?b ?box)
                   )
     :effect (and 
               (in-box ?b ?box)

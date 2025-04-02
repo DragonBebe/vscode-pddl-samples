@@ -1,16 +1,18 @@
-(define (problem sorting-conveyor-demo)
-  (:domain sorting-conveyor)
+(define (problem sorting-conveyor-loading-prob)
+  (:domain sorting-conveyor-loading)
   
   (:objects
     block1 block2 block3 - block
     red-box blue-box - box
     red blue - color
+    sorting-arm1 loading-arm1 - arm
   )
   
   (:init
-    (on-conveyor block1)
-    (on-conveyor block2)
-    (on-conveyor block3)
+    (conveyor-empty)
+    (in-storage block1)
+    (in-storage block2)
+    (in-storage block3)
     
     (block-color block1 red)
     (block-color block2 blue)
@@ -19,7 +21,11 @@
     (box-color red-box red)
     (box-color blue-box blue)
     
-    (handempty)
+    (is-sorting-arm sorting-arm1)
+    (is-loading-arm loading-arm1)
+    
+    (arm-empty sorting-arm1)
+    (arm-empty loading-arm1)
   )
   
   (:goal

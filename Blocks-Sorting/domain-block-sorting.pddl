@@ -1,4 +1,4 @@
-(define (domain sorting)
+(define (domain block-sorting)
   (:requirements :strips :typing :negative-preconditions)
   
   (:types 
