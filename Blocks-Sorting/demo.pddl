@@ -1,0 +1,20 @@
+(define (problem sorting-simple)
+  (:domain sorting)
+  
+  (:objects
+    block1 - block
+    red-box - box
+    red - color
+  )
+  
+  (:init
+    (on-conveyor block1)
+    (block-color block1 red)
+    (box-color red-box red)
+    (handempty)
+  )
+  
+  (:goal
+    (in-box block1 red-box)
+  )
+)

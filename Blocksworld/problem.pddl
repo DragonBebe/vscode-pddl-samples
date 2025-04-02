@@ -1,5 +1,5 @@
 ;; This is the template for problem files for the 4-action blocks world model.
-;;!pre-parsing:{type: "nunjucks", data: "p0.json"}
+;;!pre-parsing:{type: "nunjucks", data: "p1.json"}
 
 
 (define (problem {{data.name}})
