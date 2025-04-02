@@ -3,14 +3,15 @@
   
   (:objects
     block1 - block
-    red-box - box
-    red - color
+    red-box blue-box - box
+    red blue - color
   )
   
   (:init
     (on-conveyor block1)
     (block-color block1 red)
     (box-color red-box red)
+    (box-color blue-box blue)
     (handempty)
   )
   
